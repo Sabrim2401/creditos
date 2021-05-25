@@ -1,5 +1,6 @@
 package ar.com.ada.creditos.entities;
 
+import java.util.*;
 
 import java.util.Date;
 
@@ -14,7 +15,7 @@ import ar.com.ada.creditos.excepciones.*;
 public class Cliente {
     @Id
     @Column(name = "cliente_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //AUTOINCREMENTAL
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // AUTOINCREMENTAL
     private int clienteId;
 
     private String nombre;
@@ -27,16 +28,18 @@ public class Cliente {
     @Column(name = "direccion_alternativa")
     private String direccionAlternativa;
 
-    @Column(name="fecha_nacimiento")
-    @Temporal(TemporalType.DATE) //SOLO Poner esto si no queremos manejar HORA en el DB Server.
+    @Column(name = "fecha_nacimiento")
+    @Temporal(TemporalType.DATE) // SOLO Poner esto si no queremos manejar HORA en el DB Server.
     private Date fechaNacimiento;
-    
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL) // De uno a muchos. El mapped se basa en prestamo.java
+                                                                // Linea 27, atributo cliente.
+    private List<Prestamo> prestamos = new ArrayList<>();
+
     public Cliente(String nombre) {
         this.nombre = nombre;
 
     }
-
-
 
     public Cliente() {
     }
@@ -73,7 +76,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente [id="+ clienteId +", dni=" + dni + ", nombre=" + nombre + "]";
+        return "Cliente [id=" + clienteId + ", dni=" + dni + ", nombre=" + nombre + "]";
     }
 
     public String getDireccion() {
@@ -98,5 +101,17 @@ public class Cliente {
 
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public List<Prestamo> getPrestamos() {
+        return prestamos;
+    }
+
+    public void setPrestamos(List<Prestamo> prestamos) {
+        this.prestamos = prestamos;
+    }
+
+    public void agregarPrestamo(Prestamo prestamo) {
+        this.prestamos.add(prestamo);
     }
 }
