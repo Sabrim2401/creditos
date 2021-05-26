@@ -188,7 +188,7 @@ public class ABM {
             System.out.println(clienteEncontrado.toString() + " seleccionado para modificacion.");
 
             System.out.println(
-                    "Elija qué dato de la cliente desea modificar: \n1: nombre, \n2: DNI, \n3: domicilio, \n4: domicilio alternativo, \n5: fecha nacimiento,  \n6: telefono ");
+                    "Elija qué dato de la cliente desea modificar: \n1: nombre, \n2: DNI, \n3: domicilio, \n4: domicilio alternativo, \n5: fecha nacimiento,  \n6: telefono,  \n7: telefono alternativo ");
             int selecper = Teclado.nextInt();
             Teclado.nextLine();
 
@@ -226,6 +226,10 @@ public class ABM {
                 case 6:
                     System.out.println("Ingrese nuevo numero de telefono:");
                     clienteEncontrado.setTelefono(Teclado.nextLine());
+                    break;
+                case 7:
+                    System.out.println("Ingrese nuevo numero de telefono alternativo:");
+                    clienteEncontrado.setTelefonoBis(Teclado.nextLine());
                     break;
                 default:
                     break;
@@ -269,6 +273,9 @@ public class ABM {
 
         if (cliente.getDireccionAlternativa() != null)
             System.out.print(" Alternativo: " + cliente.getDireccionAlternativa());
+
+        if (cliente.getTelefonoBis() != null)
+            System.out.print(" Telefono Bis: " + cliente.getTelefonoBis());
 
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String fechaNacimientoStr = formatter.format(cliente.getFechaNacimiento());
