@@ -13,9 +13,9 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import ar.com.ada.creditos.entities.*;
 
-public class ClienteManager {
+public class PrestamoManager {
 
-    //Importante: clienteManager crea, lee, modifica, elimina(AMB/CRUD) y lista todos los clientes de la base de datos
+    //Importante: prestamo Manager crea, lee, modifica, elimina(AMB/CRUD) y lista todos los prestamos de la base de datos
 
     protected SessionFactory sessionFactory;
 
@@ -39,29 +39,29 @@ public class ClienteManager {
         sessionFactory.close();
     }
 
-    public void create(Cliente cliente) {
+    public void create(Prestamo prestamo) {
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        session.save(cliente);
+        session.save(prestamo);
 
 
         session.getTransaction().commit();
         session.close();
     }
 
-    public Cliente read(int clienteId) {
+    public Prestamo read(int prestamoId) {
         Session session = sessionFactory.openSession();
 
-        Cliente cliente = session.get(Cliente.class, clienteId);
+        Prestamo prestamo = session.get(Prestamo.class, prestamoId);
 
         session.close();
 
-        return cliente;
+        return prestamo;
     }
 
-    public Cliente readByDNI(int dni) {
+  /*  public Cliente readByDNI(int dni) {
         Session session = sessionFactory.openSession();
 
         Cliente cliente = session.byNaturalId(Cliente.class).using("dni", dni).load();
@@ -69,25 +69,25 @@ public class ClienteManager {
         session.close();
 
         return cliente;
-    }
+    } no existe este metodo en prestamo porque no es un atributo en Prestamo*/
 
-    public void update(Cliente cliente) {
+    public void update(Prestamo prestamo) {
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        session.update(cliente);
+        session.update(prestamo);
 
         session.getTransaction().commit();
         session.close();
     }
 
-    public void delete(Cliente cliente) {
+    public void delete(Prestamo prestamo) {
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        session.delete(cliente);
+        session.delete(prestamo);
 
         session.getTransaction().commit();
         session.close();
@@ -99,15 +99,15 @@ public class ClienteManager {
      * 
      * @return
      */
-    public List<Cliente> buscarTodos() {
+    public List<Prestamo> buscarTodosLosPrestamos() {
 
         Session session = sessionFactory.openSession();
 
         /// NUNCA HARCODEAR SQLs nativos en la aplicacion.
         // ESTO es solo para nivel educativo
-        Query query = session.createNativeQuery("SELECT * FROM cliente", Cliente.class);
+        Query query = session.createNativeQuery("SELECT * FROM cliente", Prestamo.class);
         //query = session.createQuery("From Obse")
-        List<Cliente> todos = query.getResultList();
+        List<Prestamo> todos = query.getResultList();
 
         return todos;
 
@@ -120,7 +120,7 @@ public class ClienteManager {
      * @param nombre
      * @return
      */
-    public List<Cliente> buscarPor(String nombre) {
+    public List<Prestamo> buscarPrestamoPor(int prestamoId) {
 
         Session session = sessionFactory.openSession();
 
@@ -128,11 +128,11 @@ public class ClienteManager {
         // Deberia traer solo aquella del nombre y con esto demostrarmos que trae todas
         // si pasamos
         // como nombre: "' or '1'='1"
-        Query query = session.createNativeQuery("SELECT * FROM cliente where nombre = '" + nombre + "'", Cliente.class);
+        Query query = session.createNativeQuery("SELECT * FROM prestamo where nombre = '" + prestamoId + "'", Prestamo.class);
 
-        List<Cliente> clientes = query.getResultList();
+        List<Prestamo> prestamo = query.getResultList();
 
-        return clientes;
+        return prestamo;
 
     }
 
