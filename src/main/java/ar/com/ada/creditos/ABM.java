@@ -98,13 +98,18 @@ public class ABM {
         if (domAlternativo != null)
             cliente.setDireccionAlternativa(domAlternativo);
 
-        System.out.println("Ingrese fecha de nacimiento:");
+        System.out.println("Ingrese fecha de nacimiento: dd/mm/yy ");
         Date fecha = null;
         DateFormat dateformatArgentina = new SimpleDateFormat("dd/MM/yy");
 
         fecha = dateformatArgentina.parse(Teclado.nextLine());
         cliente.setFechaNacimiento(fecha);
 
+        System.out.println("Ingrese telefono de contacto: ");
+        cliente.setTelefono(Teclado.nextLine());
+
+        System.out.println("Ingrese telefono de contacto alternativo (OPCIONAL): ");
+        cliente.setTelefonoBis(Teclado.nextLine());
 
         Prestamo prestamo = new Prestamo();
         prestamo.setImporte(new BigDecimal(10000));
@@ -183,7 +188,7 @@ public class ABM {
             System.out.println(clienteEncontrado.toString() + " seleccionado para modificacion.");
 
             System.out.println(
-                    "Elija qué dato de la cliente desea modificar: \n1: nombre, \n2: DNI, \n3: domicilio, \n4: domicilio alternativo, \n5: fecha nacimiento");
+                    "Elija qué dato de la cliente desea modificar: \n1: nombre, \n2: DNI, \n3: domicilio, \n4: domicilio alternativo, \n5: fecha nacimiento,  \n6: telefono ");
             int selecper = Teclado.nextInt();
             Teclado.nextLine();
 
@@ -217,6 +222,10 @@ public class ABM {
 
                     fecha = dateformatArgentina.parse(Teclado.nextLine());
                     clienteEncontrado.setFechaNacimiento(fecha);
+                    break;
+                case 6:
+                    System.out.println("Ingrese nuevo numero de telefono:");
+                    clienteEncontrado.setTelefono(Teclado.nextLine());
                     break;
                 default:
                     break;

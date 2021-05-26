@@ -32,6 +32,11 @@ public class Cliente {
     @Temporal(TemporalType.DATE) // SOLO Poner esto si no queremos manejar HORA en el DB Server.
     private Date fechaNacimiento;
 
+    private String telefono;
+
+    @Column(name = "telefono_bis")
+    private String telefonoBis;
+
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL) // De uno a muchos. El mapped se basa en prestamo.java
                                                                 // Linea 27, atributo cliente.
                                                                 // Cascade obliga a que cuando se actualize objeto
@@ -112,6 +117,22 @@ public class Cliente {
 
     public void setPrestamos(List<Prestamo> prestamos) {
         this.prestamos = prestamos;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getTelefonoBis() {
+        return telefonoBis;
+    }
+
+    public void setTelefonoBis(String telefonoBis) {
+        this.telefonoBis = telefonoBis;
     }
 
     public void agregarPrestamo(Prestamo prestamo) {
