@@ -34,6 +34,9 @@ public class Cliente {
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL) // De uno a muchos. El mapped se basa en prestamo.java
                                                                 // Linea 27, atributo cliente.
+                                                                // Cascade obliga a que cuando se actualize objeto
+                                                                // clientes trata de actualizar los objetos de la lista
+                                                                // de abajo
     private List<Prestamo> prestamos = new ArrayList<>();
 
     public Cliente(String nombre) {

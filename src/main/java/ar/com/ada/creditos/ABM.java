@@ -1,5 +1,6 @@
 package ar.com.ada.creditos;
 
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -103,6 +104,15 @@ public class ABM {
 
         fecha = dateformatArgentina.parse(Teclado.nextLine());
         cliente.setFechaNacimiento(fecha);
+
+
+        Prestamo prestamo = new Prestamo();
+        prestamo.setImporte(new BigDecimal(10000));
+
+        prestamo.setCliente(cliente);
+        prestamo.setCuotas(5);
+        prestamo.setFecha(new Date()); // new date pone la fecha actualizada
+        prestamo.setFechaAlta(new Date());
 
         ABMCliente.create(cliente);
 
