@@ -105,7 +105,7 @@ public class PrestamoManager {
 
         /// NUNCA HARCODEAR SQLs nativos en la aplicacion.
         // ESTO es solo para nivel educativo
-        Query query = session.createNativeQuery("SELECT * FROM cliente", Prestamo.class);
+        Query query = session.createNativeQuery("SELECT * FROM prestamo", Prestamo.class);
         //query = session.createQuery("From Obse")
         List<Prestamo> todos = query.getResultList();
 

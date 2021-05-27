@@ -37,7 +37,7 @@ public class Cliente {
     @Column(name = "telefono_bis")
     private String telefonoBis;
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL) // De uno a muchos. El mapped se basa en prestamo.java
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.EAGER) // De uno a muchos. El mapped se basa en prestamo.java
                                                                 // Linea 27, atributo cliente.
                                                                 // Cascade obliga a que cuando se actualize objeto
                                                                 // clientes trata de actualizar los objetos de la lista

@@ -16,12 +16,14 @@ public class ABM {
     public static Scanner Teclado = new Scanner(System.in);
 
     protected ClienteManager ABMCliente = new ClienteManager();
+    protected PrestamoManager ABMPrestamo = new PrestamoManager();
 
     public void iniciar() throws Exception {
 
         try {
 
             ABMCliente.setup();
+            ABMPrestamo.setup();
 
             printOpciones();
 
@@ -56,6 +58,13 @@ public class ABM {
                         listarPorNombre();
                         break;
 
+                    case 6:
+                        asignarPrestamoCliente();
+                        break;
+
+                    case 7:
+                        listarPrestamos();
+                        break;
                     default:
                         System.out.println("La opcion no es correcta.");
                         break;
@@ -283,6 +292,51 @@ public class ABM {
         System.out.println(" Fecha Nacimiento: " + fechaNacimientoStr);
     }
 
+    public void mostrarPrestamo(Prestamo prestamo) {
+
+        System.out.print("Id Prestamo: " + prestamo.getPrestamoId());
+        System.out.print(" Datos Cliente: " + prestamo.getCliente());
+        System.out.print(" Importe prestamo: " + prestamo.getImporte());
+        System.out.print(" Cuotas: " + prestamo.getCuotas());
+        System.out.print(" Fecha de Alta: " + prestamo.getFechaAlta());
+        System.out.println("--**--**--**--");
+    }
+
+    public void asignarPrestamoCliente() {
+
+        System.out.println("Ingrese el ID de la cliente a asignar prestamo:");
+        int id = Teclado.nextInt();
+        Teclado.nextLine();
+        Cliente clienteEncontrado = ABMCliente.read(id);
+
+        System.out.println("Ingrese monto del prestamo: ");
+        Prestamo prestamo = new Prestamo();
+        int monto = Teclado.nextInt();
+        Teclado.nextLine();
+        prestamo.setImporte(new BigDecimal(monto));
+
+        System.out.println("Ingrese cantidad de cuotas: ");
+        int cuotas = Teclado.nextInt();
+        Teclado.nextLine();
+        prestamo.setCuotas(cuotas);
+
+        prestamo.setCliente(clienteEncontrado);
+
+        prestamo.setFecha(new Date());
+        prestamo.setFechaAlta(new Date());
+        this.ABMPrestamo.create(prestamo);
+
+        System.out.println("Cliente con prestamo asignado:  " + prestamo.getCliente());
+    }
+
+    public void listarPrestamos() {
+
+        List<Prestamo> todos = ABMPrestamo.buscarTodosLosPrestamos();
+        for (Prestamo p : todos) {
+            mostrarPrestamo(p);
+        }
+    }
+
     public static void printOpciones() {
         System.out.println("=======================================");
         System.out.println("");
@@ -291,6 +345,8 @@ public class ABM {
         System.out.println("3. Para modificar un cliente.");
         System.out.println("4. Para ver el listado.");
         System.out.println("5. Buscar un cliente por nombre especifico(SQL Injection)).");
+        System.out.println("6. Asignar prestamo a cliente.");
+        System.out.println("7. Para ver listado de prestamos.");
         System.out.println("0. Para terminar.");
         System.out.println("");
         System.out.println("=======================================");
