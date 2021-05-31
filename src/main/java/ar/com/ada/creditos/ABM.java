@@ -66,6 +66,9 @@ public class ABM {
                     case 7:
                         listarPrestamos();
                         break;
+                    case 8:
+                        pagarPrestamo();
+                        break;
                     default:
                         System.out.println("La opcion no es correcta.");
                         break;
@@ -339,6 +342,12 @@ public class ABM {
         }
     }
 
+    public void pagarPrestamo() {
+
+        //GENERAR CODIGO//
+    }
+
+
     public static void printOpciones() {
         System.out.println("=======================================");
         System.out.println("");
@@ -349,6 +358,7 @@ public class ABM {
         System.out.println("5. Buscar un cliente por nombre especifico(SQL Injection)).");
         System.out.println("6. Asignar prestamo a cliente.");
         System.out.println("7. Para ver listado de prestamos.");
+        System.out.println("8. Pagar prestamo. ");
         System.out.println("0. Para terminar.");
         System.out.println("");
         System.out.println("=======================================");
