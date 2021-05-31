@@ -82,7 +82,14 @@ public class Prestamo {
     }
 
     // ENUMERADO
+    public EstadoPrestamoEnum getEstadoId() {
 
+        return EstadoPrestamoEnum.parse(this.estadoId); //devuelve el estado del prestamo. EJ: Ingresa 1, devuelve SOLICITADO
+    }
+
+    public void setEstadoId(EstadoPrestamoEnum estadoId) {
+        this.estadoId = estadoId.getValue(); //En este caso, si escribo SOLICITADO, devuelve 1
+    }
     public enum EstadoPrestamoEnum {
         SOLICITADO(1),
         RECHAZADO(2), 
